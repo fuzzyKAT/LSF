@@ -26,6 +26,8 @@ public:
     void ClearImage();
     
     void DrawImage();
+    
+    void AddDrawCmd(char c);
 
 private:
     
@@ -33,6 +35,7 @@ private:
     
     float gamma;
     trt_image image;
+    std::string drawcmd;
 };
 
 #endif

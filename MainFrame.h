@@ -53,6 +53,7 @@ public:
         SetIterNum(0);
         
         turtleViever = new TurtleGraph(this, wxID_ANY);
+        turtleViever->AddDrawCmd('F');
         glContext = new wxGLContext(turtleViever);
         turtleViever->SetMinSize(wxSize(600, 300));
         

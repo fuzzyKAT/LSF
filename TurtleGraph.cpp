@@ -68,23 +68,6 @@ void TurtleGraph::CompileImage(
             case '-': 
                 cst.alpha -= theta;
                 break;
-                
-            case 'F':
-                xnext = cst.x + cos(cst.alpha);
-                ynext = cst.y + sin(cst.alpha);
-                
-                image.push_back(trt_point(cst.x, cst.y));
-                image.push_back(trt_point(xnext, ynext));
-                
-                cst.x = xnext;
-                cst.y = ynext;
-                
-                xmax = max(cst.x, xmax);
-                ymax = max(cst.y, ymax);
-                xmin = min(cst.x, xmin);
-                ymin = min(cst.y, ymin);
-                
-                break;
             
             case 'b': 
                 cst.x += cos(cst.alpha);
@@ -105,7 +88,24 @@ void TurtleGraph::CompileImage(
                 break;
             }
             
-            default: break;
+            default:
+                if(drawcmd.find_first_of(*i) != std::string::npos)
+                {
+                    xnext = cst.x + cos(cst.alpha);
+                    ynext = cst.y + sin(cst.alpha);
+                
+                    image.push_back(trt_point(cst.x, cst.y));
+                    image.push_back(trt_point(xnext, ynext));
+                
+                    cst.x = xnext;
+                    cst.y = ynext;
+                
+                    xmax = max(cst.x, xmax);
+                    ymax = max(cst.y, ymax);
+                    xmin = min(cst.x, xmin);
+                    ymin = min(cst.y, ymin);
+                }
+                break;
         }
     }
     
@@ -132,6 +132,11 @@ void TurtleGraph::CompileImage(
         p.x = ax*p.x + bx;
         p.y = ay*p.y + by;
     }
+}
+
+void TurtleGraph::AddDrawCmd(char c)
+{
+    drawcmd.push_back(c);
 }
 
 void TurtleGraph::ClearImage()

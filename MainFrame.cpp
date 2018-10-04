@@ -92,21 +92,26 @@ wxGrid *MainFrame::setupRulePanel()
 
 void MainFrame::SetupControlPanel()
 {
+    cmdsCtrl = new wxTextCtrl(
+        this, ID_CMDS_CTRL, "F", wxDefaultPosition, 
+        wxSize(200, 20), wxTE_LEFT);
+    
     axiomCtrl = new wxTextCtrl(
         this, ID_AXIOM_CTRL, "F", wxDefaultPosition, 
         wxSize(200, 20), wxTE_LEFT);  
 
     alphaCtrl = new wxTextCtrl(
         this, -1, "0", wxDefaultPosition, 
-        wxSize(200, 20), wxTE_LEFT);
+        wxSize(50, 20), wxTE_LEFT);
         
     thetaCtrl = new wxTextCtrl(
         this, -1, "60", wxDefaultPosition, 
-        wxSize(200, 20), wxTE_LEFT);  
+        wxSize(50, 20), wxTE_LEFT);  
         
     wxStaticText *axiomText = new wxStaticText(this, wxID_ANY, "axiom =");
     wxStaticText *alphaText = new wxStaticText(this, wxID_ANY, "alpha =");
     wxStaticText *thetaText = new wxStaticText(this, wxID_ANY, "theta =");
+    wxStaticText *cmdText = new wxStaticText(this, wxID_ANY, "commands =");
     
     wxSize sz = axiomText->GetSize();
     alphaText->SetMinSize(sz);
@@ -119,9 +124,12 @@ void MainFrame::SetupControlPanel()
     wxButton *butRemRule = new wxButton(this, ID_BUT_REM_RULE, "Rem Rule");
     
     angleSizer->Add(alphaText, 0, wxRIGHT, 5);
-    angleSizer->Add(alphaCtrl, 1, wxEXPAND, 0);
-    angleSizer->Add(thetaText, 0, wxRIGHT | wxLEFT, 5);
-    angleSizer->Add(thetaCtrl, 1, wxEXPAND, 0);
+    angleSizer->Add(alphaCtrl, 0, wxRIGHT, 5);
+    angleSizer->Add(thetaText, 0, wxRIGHT, 5);
+    angleSizer->Add(thetaCtrl, 0, wxRIGHT, 5);
+    angleSizer->Add(cmdText, 0, wxRIGHT, 5);
+    angleSizer->Add(cmdsCtrl, 1, wxEXPAND, 0);
+    
     axiomSizer->Add(axiomText, 0, wxRIGHT, 5);
     axiomSizer->Add(axiomCtrl, 1, wxEXPAND, 0);
     

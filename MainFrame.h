@@ -18,6 +18,7 @@ enum EventID
     
     ID_AXIOM_CTRL,
     ID_RULE_GRID,
+    ID_CMDS_CTRL,
     
     ID_BUT_ITERATE,
     ID_BUT_CLEAR,
@@ -53,7 +54,7 @@ public:
         SetIterNum(0);
         
         turtleViever = new TurtleGraph(this, wxID_ANY);
-        turtleViever->AddDrawCmd('F');
+        turtleViever->SetDrawCmds(std::string("F"));
         glContext = new wxGLContext(turtleViever);
         turtleViever->SetMinSize(wxSize(600, 300));
         
@@ -71,6 +72,7 @@ public:
         Bind(wxEVT_BUTTON, &MainFrame::OnButRemRule, this, ID_BUT_REM_RULE);
         
         Bind(wxEVT_TEXT, &MainFrame::OnAxiomChanged, this, ID_AXIOM_CTRL);
+        Bind(wxEVT_TEXT, &MainFrame::OnCmdsChanged, this, ID_CMDS_CTRL);
         
         Bind(wxEVT_PAINT, &MainFrame::OnPaint, this);
     }
@@ -81,6 +83,7 @@ private:
 
     wxString currWord;
 
+    wxTextCtrl *cmdsCtrl;
     wxTextCtrl *axiomCtrl;
     wxTextCtrl *alphaCtrl; 
     wxTextCtrl *thetaCtrl;
@@ -125,6 +128,12 @@ private:
         SetIterNum(0);
         currWord =  axiomCtrl->GetLineText(0);
         turtleViever->ClearImage();
+    }
+    
+    void OnCmdsChanged(wxCommandEvent &event)
+    {
+        std::string cmds(cmdsCtrl->GetLineText(0));
+        turtleViever->SetDrawCmds(cmds);
     }
     
     void OnButIterate(wxCommandEvent &event);

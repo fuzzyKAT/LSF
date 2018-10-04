@@ -134,9 +134,9 @@ void TurtleGraph::CompileImage(
     }
 }
 
-void TurtleGraph::AddDrawCmd(char c)
+void TurtleGraph::SetDrawCmds(const std::string &cmds)
 {
-    drawcmd.push_back(c);
+    drawcmd = cmds;
 }
 
 void TurtleGraph::ClearImage()

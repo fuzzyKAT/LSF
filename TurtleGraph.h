@@ -27,7 +27,7 @@ public:
     
     void DrawImage();
     
-    void AddDrawCmd(char c);
+    void SetDrawCmds(const std::string &cmds);
 
 private:
     

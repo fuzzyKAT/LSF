@@ -7,6 +7,8 @@
     #include <wx/wx.h>
 #endif
 
+#include <wx/grid.h>
+
 enum EventID
 {
     // menu File
@@ -77,14 +79,13 @@ private:
     wxTextCtrl *axiomCtrl;
     wxTextCtrl *alphaCtrl; 
     wxTextCtrl *thetaCtrl;
-    wxTextCtrl *xRuleCtrl;
-    wxTextCtrl *yRuleCtrl;
-    wxTextCtrl *fRuleCtrl;
-    wxTextCtrl *bRuleCtrl;
+    
+    wxGrid *ruleGrid;
     
     TurtleGraph *turtleViever;
     wxGLContext *glContext;
     
+    wxGrid *setupRulePanel();
     void SetupControlPanel();
     
     void SetIterNum(int val)

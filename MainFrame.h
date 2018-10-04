@@ -16,10 +16,13 @@ enum EventID
     
     ID_CREATE_FRACTAL,
     
+    ID_AXIOM_CTRL,
+    ID_RULE_GRID,
+    
     ID_BUT_ITERATE,
     ID_BUT_CLEAR,
-    
-    ID_AXIOM_CTRL
+    ID_BUT_ADD_RULE,
+    ID_BUT_REM_RULE
 };
 
 class MainFrame : public wxFrame
@@ -51,7 +54,6 @@ public:
         
         turtleViever = new TurtleGraph(this, wxID_ANY);
         glContext = new wxGLContext(turtleViever);
-        //glContext->SetCurrent(*turtleViever);
         turtleViever->SetMinSize(wxSize(600, 300));
         
         SetupControlPanel();
@@ -64,6 +66,8 @@ public:
         
         Bind(wxEVT_BUTTON, &MainFrame::OnButIterate, this, ID_BUT_ITERATE);
         Bind(wxEVT_BUTTON, &MainFrame::OnButClear, this, ID_BUT_CLEAR);
+        Bind(wxEVT_BUTTON, &MainFrame::OnButAddRule, this, ID_BUT_ADD_RULE);
+        Bind(wxEVT_BUTTON, &MainFrame::OnButRemRule, this, ID_BUT_REM_RULE);
         
         Bind(wxEVT_TEXT, &MainFrame::OnAxiomChanged, this, ID_AXIOM_CTRL);
         
@@ -75,7 +79,7 @@ private:
     int iterNum;
 
     wxString currWord;
-    //wxTextCtrl *wordDisplay;
+
     wxTextCtrl *axiomCtrl;
     wxTextCtrl *alphaCtrl; 
     wxTextCtrl *thetaCtrl;
@@ -118,8 +122,6 @@ private:
     void OnAxiomChanged(wxCommandEvent &event)
     {
         SetIterNum(0);
-        //wordDisplay->Clear();
-        //wordDisplay->AppendText(axiomCtrl->GetLineText(0));
         currWord =  axiomCtrl->GetLineText(0);
         turtleViever->ClearImage();
     }
@@ -129,10 +131,23 @@ private:
     void OnButClear(wxCommandEvent &event)
     {
         SetIterNum(0);
-        //wordDisplay->Clear();
-        //wordDisplay->AppendText(axiomCtrl->GetLineText(0));
         currWord =  axiomCtrl->GetLineText(0);
         turtleViever->ClearImage();
+    }
+    
+    void OnButAddRule(wxCommandEvent &event)
+    {
+        ruleGrid->AppendRows(1);
+    }
+    
+    void OnButRemRule(wxCommandEvent &event)
+    {
+        wxArrayInt srows = ruleGrid->GetSelectedRows();
+        
+        for(size_t i = 0; i < srows.GetCount(); ++i)
+        {
+            ruleGrid->DeleteRows(srows[i]);
+        }
     }
 };
 

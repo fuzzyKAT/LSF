@@ -32,7 +32,6 @@ void MainFrame::OnButIterate(wxCommandEvent &event)
     theta = M_PI*theta/180;
     
     turtleViever->CompileImage(word, theta, alpha);
-    //glContext->SetCurrent(*turtleViever);
     turtleViever->DrawImage();
     
     delete wit;
@@ -70,7 +69,7 @@ void MainFrame::OnSaveWord(wxCommandEvent &event)
 
 wxGrid *MainFrame::setupRulePanel()
 {
-    wxGrid *ruleGrid = new wxGrid(this, wxID_ANY);
+    wxGrid *ruleGrid = new wxGrid(this, ID_RULE_GRID);
     
     ruleGrid->CreateGrid(4, 2);
     ruleGrid->SetColLabelValue(0, "symbol");
@@ -84,15 +83,15 @@ wxGrid *MainFrame::setupRulePanel()
     ruleGrid->SetCellValue(2, 1, "X");
     ruleGrid->SetCellValue(3, 1, "Y");
     
+    ruleGrid->DisableDragRowSize();
+
+    ruleGrid->SetColSize(1, 200);
+    
     return ruleGrid;
 }
 
 void MainFrame::SetupControlPanel()
 {
-    //wordDisplay = new wxTextCtrl(
-    //    this, -1, "F", wxDefaultPosition, 
-    //    wxSize(100,60), wxTE_MULTILINE);
-    
     axiomCtrl = new wxTextCtrl(
         this, ID_AXIOM_CTRL, "F", wxDefaultPosition, 
         wxSize(200, 20), wxTE_LEFT);  
@@ -105,8 +104,6 @@ void MainFrame::SetupControlPanel()
         this, -1, "60", wxDefaultPosition, 
         wxSize(200, 20), wxTE_LEFT);  
         
-    //wordDisplay->SetEditable(false);
-        
     wxStaticText *axiomText = new wxStaticText(this, wxID_ANY, "axiom =");
     wxStaticText *alphaText = new wxStaticText(this, wxID_ANY, "alpha =");
     wxStaticText *thetaText = new wxStaticText(this, wxID_ANY, "theta =");
@@ -117,6 +114,9 @@ void MainFrame::SetupControlPanel()
     
     wxSizer *angleSizer = new wxBoxSizer(wxHORIZONTAL);
     wxSizer *axiomSizer = new wxBoxSizer(wxHORIZONTAL);
+    
+    wxButton *butAddRule = new wxButton(this, ID_BUT_ADD_RULE, "Add Rule");
+    wxButton *butRemRule = new wxButton(this, ID_BUT_REM_RULE, "Rem Rule");
     
     angleSizer->Add(alphaText, 0, wxRIGHT, 5);
     angleSizer->Add(alphaCtrl, 1, wxEXPAND, 0);
@@ -139,11 +139,12 @@ void MainFrame::SetupControlPanel()
     
     buttonSizer->Add(but1, 1, wxTOP, 10);
     buttonSizer->Add(but2, 1, wxTOP, 10);
+    buttonSizer->Add(butAddRule, 1, wxTOP, 10);
+    buttonSizer->Add(butRemRule, 1, wxTOP, 10);
     
     bottomSizer->Add(buttonSizer, 0, wxLEFT, 10);
     bottomSizer->Add(textCtrlSizer, 1, wxEXPAND | wxLEFT | wxRIGHT, 10);
     topSizer->Add(turtleViever, 1, wxEXPAND, 0);
-    //topSizer->Add(wordDisplay, 0, wxEXPAND, 0);
     topSizer->Add(bottomSizer, 0, wxEXPAND, 0);
     
     SetSizerAndFit(topSizer);

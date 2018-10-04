@@ -15,7 +15,7 @@ struct trt_state
 {
     float x;
     float y;
-    float alpha;
+    double alpha;
 };
 
 TurtleGraph::TurtleGraph(
@@ -32,7 +32,7 @@ void TurtleGraph::OnResize(wxSizeEvent &event)
 }
 
 void TurtleGraph::CompileImage(
-    const std::string &word, float theta, float alpha)
+    const std::string &word, double theta, double alpha)
 {
     if(image.size())
     {
@@ -109,10 +109,10 @@ void TurtleGraph::CompileImage(
         }
     }
     
-    float ax = 2.0f*gamma/(xmax - xmin);
-    float ay = 2.0f*gamma/(ymax - ymin);
-    float bx = -gamma*(xmax + xmin)/(xmax - xmin);
-    float by = -gamma*(ymax + ymin)/(ymax - ymin);
+    double ax = 2.0f*gamma/(xmax - xmin);
+    double ay = 2.0f*gamma/(ymax - ymin);
+    double bx = -gamma*(xmax + xmin)/(xmax - xmin);
+    double by = -gamma*(ymax + ymin)/(ymax - ymin);
     
     if( (ymax == 0) && (ymin == 0) )
     {

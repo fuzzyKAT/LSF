@@ -21,7 +21,7 @@ public:
 
     TurtleGraph(wxWindow *parent, wxWindowID id, float _gamma = 0.95f);
     
-    void CompileImage(const std::string &word, float theta, float alpha);
+    void CompileImage(const std::string &word, double theta, double alpha);
     
     void ClearImage();
     

@@ -72,6 +72,12 @@ public:
         Bind(wxEVT_PAINT, &MainFrame::OnPaint, this);
     }
     
+    ~MainFrame()
+    {
+        delete glContext;
+        delete turtleViever;
+    }
+    
 private:
 
     int iterNum;

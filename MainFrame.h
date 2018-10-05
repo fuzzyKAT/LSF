@@ -88,7 +88,7 @@ private:
     TurtleGraph *turtleViever;
     wxGLContext *glContext;
     
-    wxGrid *setupRulePanel();
+    wxGrid *setupRuleGrid();
     void SetupControlPanel();
     
     void SetIterNum(int val)

@@ -63,28 +63,22 @@ void MainFrame::OnSaveWord(wxCommandEvent &event)
     
     wxTextOutputStream outputText(outputStream);
     
-    //outputText<<wordDisplay->GetValue();
     outputText<<currWord;
 }
 
-wxGrid *MainFrame::setupRulePanel()
+wxGrid *MainFrame::setupRuleGrid()
 {
     wxGrid *ruleGrid = new wxGrid(this, ID_RULE_GRID);
     
-    ruleGrid->CreateGrid(4, 2);
+    ruleGrid->CreateGrid(2, 2);
     ruleGrid->SetColLabelValue(0, "symbol");
     ruleGrid->SetColLabelValue(1, "rule");
     ruleGrid->SetCellValue(0, 0, "F");
     ruleGrid->SetCellValue(1, 0, "b");
-    ruleGrid->SetCellValue(2, 0, "X");
-    ruleGrid->SetCellValue(3, 0, "Y");
     ruleGrid->SetCellValue(0, 1, "F");
     ruleGrid->SetCellValue(1, 1, "b");
-    ruleGrid->SetCellValue(2, 1, "X");
-    ruleGrid->SetCellValue(3, 1, "Y");
     
     ruleGrid->DisableDragRowSize();
-
     ruleGrid->SetColSize(1, 200);
     
     return ruleGrid;
@@ -140,7 +134,7 @@ void MainFrame::SetupControlPanel()
     wxSizer *buttonSizer = new wxBoxSizer(wxVERTICAL);
     wxSizer *textCtrlSizer = new wxBoxSizer(wxVERTICAL);
     
-    ruleGrid = setupRulePanel();
+    ruleGrid = setupRuleGrid();
     textCtrlSizer->Add(angleSizer, 0, wxEXPAND | wxTOP, 10);
     textCtrlSizer->Add(axiomSizer, 0, wxEXPAND | wxTOP, 10);
     textCtrlSizer->Add(ruleGrid, 1, wxEXPAND | wxTOP, 10);

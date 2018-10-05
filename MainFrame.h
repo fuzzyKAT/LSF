@@ -37,16 +37,12 @@ public:
         menuFile->Append(ID_SAVE_WORD, "Save word");
         menuFile->AppendSeparator();
         menuFile->Append(wxID_EXIT);
-    
-        wxMenu *menuHelp = new wxMenu();
-        menuHelp->Append(wxID_ABOUT);
         
         wxMenu *menuFrac = new wxMenu();
         menuFrac->Append(ID_CREATE_FRACTAL, "&Create Fractal");
     
         wxMenuBar *menuBar = new wxMenuBar();
         menuBar->Append(menuFile, "&File");
-        menuBar->Append(menuHelp, "&Help");
         menuBar->Append(menuFrac, "&Fractals");
         SetMenuBar(menuBar);
     
@@ -63,7 +59,6 @@ public:
         currWord = "F";
     
         Bind(wxEVT_MENU, &MainFrame::OnSaveWord, this, ID_SAVE_WORD);
-        Bind(wxEVT_MENU, &MainFrame::OnAbout, this, wxID_ABOUT);
         Bind(wxEVT_MENU, &MainFrame::OnExit, this, wxID_EXIT);
         
         Bind(wxEVT_BUTTON, &MainFrame::OnButIterate, this, ID_BUT_ITERATE);
@@ -115,12 +110,6 @@ private:
     void OnExit(wxCommandEvent &event)
     {
         Close(true);
-    }
-    
-    void OnAbout(wxCommandEvent &event)
-    {
-        wxMessageBox("This is a wxWidgets Hello World example",
-            "About Hello World", wxOK | wxICON_INFORMATION);
     }
     
     void OnAxiomChanged(wxCommandEvent &event)

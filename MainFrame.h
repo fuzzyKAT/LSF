@@ -14,8 +14,6 @@ enum EventID
     // menu File
     ID_SAVE_WORD = 1,
     
-    ID_CREATE_FRACTAL,
-    
     ID_AXIOM_CTRL,
     ID_RULE_GRID,
     ID_CMDS_CTRL,
@@ -37,13 +35,9 @@ public:
         menuFile->Append(ID_SAVE_WORD, "Save word");
         menuFile->AppendSeparator();
         menuFile->Append(wxID_EXIT);
-        
-        wxMenu *menuFrac = new wxMenu();
-        menuFrac->Append(ID_CREATE_FRACTAL, "&Create Fractal");
     
         wxMenuBar *menuBar = new wxMenuBar();
         menuBar->Append(menuFile, "&File");
-        menuBar->Append(menuFrac, "&Fractals");
         SetMenuBar(menuBar);
     
         CreateStatusBar();

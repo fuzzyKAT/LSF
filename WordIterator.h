@@ -8,11 +8,6 @@ using std::string;
 class WordIterator
 {
 public:
-
-    bool validateWord(const string &word)
-    {
-        return (word.find_first_not_of(operators) == string::npos);
-    }
     
     // Добавляет порождающее правило
     void addRule(char var, string &rule)
@@ -34,8 +29,7 @@ public:
                 case '\r' :
                 case ' ' :
                     break;
-                //case 'F' :
-                //case 'b' : 
+                
                 case '+' :
                 case '-' :
                 case '[' : 
@@ -53,7 +47,6 @@ public:
                         break;
                     }
                     
-                    //string &rule = rules[*i];
                     word += (*it).second;
                     break;
                 }
